@@ -1,14 +1,14 @@
 // canvas settings
-const width = 1000;
+const width = 2000;
 const height = 1000;
 
 // point settings
-const numPoints = 7000;
+const numPoints = 500;
 const pointWidth = 4;
 const pointMargin = 3;
 
 // animation settings
-const duration = 3000;
+const duration = 30000;
 const ease = d3.easeCubic;
 let timer;
 let currLayout = 0;
