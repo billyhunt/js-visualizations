@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.5/p5.min.js" type="text/javascript"></script>
+    </head>
+    <body>
+<script>
+var w = [],x=0,y=1;
+
+var redSeed = Math.floor(Math.random() * 255);
+var greenSeed = Math.floor(Math.random() * 255);
+var blueSeed = Math.floor(Math.random() * 255);
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  for (var i = 0; i < 80; i++) {
+    w[i] = new walker();
+  }
+  background(000);
+}
+
+function draw() {
+  for (var i = 0; i < 80; i++) {
+    w[i].update();
+    w[i].display();
+  }
+}
+
+function adjust(color) {
+	if (color < 1) {
+		return color ++;
+	} else if (color > 254) {
+		return color --;
+	} else {
+		return Math.round(Math.random()) ? ++color : --color;
+	}
+}
+
+function walker() {
+  this.pos = createVector(width / 2, height / 2);
+  this.vel = createVector(0, 0);
+
+  this.update = function() {
+    this.acc = createVector(random(-.1, .1), random(-.1, .1));
+    this.vel.add(this.acc);
+    this.pos.add(this.vel);
+  }
+
+  this.display = function() {
+	redSeed = adjust(redSeed);
+	greenSeed = adjust(greenSeed);
+	blueSeed = adjust(blueSeed);
+	// console.log(redSeed, greenSeed, blueSeed);
+
+    if (y < 0) {
+      fill(x, 0, 0, 0);
+    } else {
+      fill(x, 0, 0, 1);
+    }
+    stroke(redSeed, greenSeed, blueSeed, 1)
+    noFill();
+    ellipse(this.pos.x, this.pos.y, y, y);
+    x += 1;
+    y -= 0.007;
+  }
+}
+            </script>
+            <style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+            </style>
+    </body>
+</html>
